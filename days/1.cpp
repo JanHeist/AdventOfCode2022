@@ -22,24 +22,18 @@ int main() {
 
     string line;
     ifstream file ("input/1.txt");
-    int i = 0;
 
     if (file.is_open()) {
         while (getline(file, line)) {
-            if (line == "\n" || line.length() == 0) {
-                i++;
+            if (line == "\n" || line.length() == 0)
                 needBiggerArray();
-            } else
-                arr[i] += stoi(line);
+            else arr[arr_size] += stoi(line);
         }
         file.close();
-    } else {
+    } else
         cout << "Konnte Datei nicht oeffnen";
-    }
 
-    int top1 = 0;
-    int top2 = 0;
-    int top3 = 0;
+    int top1 = 0, top2 = 0, top3 = 0;
     for (int i = 0; i < arr_size; i++) {
         cout << "Elf " << i + 1 << ": " << arr[i] << endl;
         if (arr[i] > top1) {
@@ -49,9 +43,8 @@ int main() {
         } else if (arr[i] > top2) {
             top3 = top2;
             top2 = arr[i];
-        } else if (arr[i] > top3) {
+        } else if (arr[i] > top3)
             top3 = arr[i];
-        }
     }
 
     cout << endl << "Top1: " << top1;

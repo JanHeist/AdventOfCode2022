@@ -27,7 +27,7 @@ int main() {
         while (getline(file, line)) {
             if (line == "\n" || line.length() == 0)
                 needBiggerArray();
-            else arr[arr_size] += stoi(line);
+            else arr[arr_size-1] += stoi(line);
         }
         file.close();
     } else

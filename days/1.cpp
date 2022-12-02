@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "../utils/getinput.hpp"
+#include <fstream>
 using namespace std;
 
 int arr_size = 1;

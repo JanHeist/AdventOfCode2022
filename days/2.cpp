@@ -63,18 +63,40 @@ int main() {
     ifstream file ("input/2.txt");
 
     int count = 0;
+    int count2 = 0;
 
     if (file.is_open()) {
         while (getline(file, line)) {
 
             count += getCombinationValue(getNumFromString(line, false), getNumFromString(line, true));
 
+            int first = getNumFromString(line, false);
+            int second = getNumFromString(line, true);
+
+            if (second == 1) { // verlieren
+                if (first == 1)
+                    second = 3;
+                else if (first == 3)
+                    second = 2;
+            }
+            else if (second == 2) // gleichstand
+                second = first;
+            else if (second == 3) { // gewinnen
+                if (first == 1)
+                    second = 2;
+                else if (first == 3)
+                    second = 1;
+            }
+
+            count2 += getCombinationValue(first, second);
+
 
         }
         file.close();
     } else cout << "Konnte Datei nicht oeffnen";
 
-    cout << "Punkte: " << count;
+    cout << "Punkte: " << count << endl;
+    cout << "Punkte2: " << count2 << endl;
 
     return 0;
 }

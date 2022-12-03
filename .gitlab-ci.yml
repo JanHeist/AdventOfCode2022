@@ -1,0 +1,20 @@
+GitLab-To-GitHub:
+  image: alpine:latest
+  stage: deploy
+  tags:
+    - heist
+  before_script:
+    - apk --update add openssh-client
+    - apk --update add git
+    - eval `ssh-agent -s`
+    - echo "${SSH_PRIVATE_KEY}" | tr -d '\r' | ssh-add - > /dev/null # add ssh ke
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo "$SSH_PUBLIC_KEY" >> ~/.ssh/id_rsa.pub
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+  script:
+    - git config --global user.email "heist@rhrk.uni-kl.de"
+    - git config --global user.name "JanHeist"
+    - git remote add github $GIT_REMOTE || git remote set-url github $GIT_REMOTE
+    - git fetch github
+    - git push github origin/$CI_COMMIT_REF_NAME:main --force

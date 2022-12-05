@@ -7,11 +7,8 @@ using namespace std;
 // TBVFVDZPN
 
 string splitStr(string data, char splitter, int index) {
-
     stringstream ss(data);
-
     getline(ss, data, splitter);
-
 
     for (int i = 0; i <= index-1; i++) {
         getline(ss, data, splitter);
@@ -21,7 +18,6 @@ string splitStr(string data, char splitter, int index) {
 }
 
 int gettop(int *arr, int col, int row) {
-
     for (int i = col*row - 1; i >= 0; i--) {
         if (arr[i] != 0)
             return i;
@@ -42,18 +38,14 @@ int main() {
     string line;
     ifstream file ("input/5.txt");
 
-    int rows = 0;
-    int cols = 0;
+    int rows = 0, cols = 0;
     string lineArr[512];
-
 
     if (file.is_open()) {
         int c = 0;
         bool countrows = true;
 
-
         while (getline(file, line)) {
-
             lineArr[c++] = line;
 
             if (line.length() / 4 + 1 > cols)
@@ -63,7 +55,6 @@ int main() {
                 rows++;
             else if (line[1] == '1')
                 countrows = false;
-
         }
         file.close();
     } else cout << "Konnte Datei nicht oeffnen";
@@ -78,7 +69,6 @@ int main() {
 
 
     for (int i = rows-1; i >= 0; i--) {
-        //cout << lineArr[i] << endl;
         for (int j = 0; j < cols; j++) {
             string tmp = lineArr[i];
             if (j*4+1 > tmp.length())
@@ -92,16 +82,6 @@ int main() {
         }
     }
 
-
-    for (int i = 0; i < cols; i++) {
-        for (int j = 0; j < rows; j++) {
-            cout << (char) data[i][j] << " ";
-        }
-        cout << endl;
-    }
-
-    cout << "üüüüüüüüüüüüüüüüüüü" << endl;
-
     file.open("input/5.txt");
     if (file.is_open()) {
         while (getline(file, line)) {
@@ -111,7 +91,6 @@ int main() {
             int amount = stoi(splitStr(line, ' ', 1));
             int from = stoi(splitStr(line, ' ', 3));
             int to = stoi(splitStr(line, ' ', 5));
-            cout << amount << " " << from << " " << to << endl;
 
             for (int i = 0; i < amount; i++) {
                 int top = gettop(data[from - 1], cols, rows);
@@ -119,20 +98,9 @@ int main() {
                 data[from - 1][top] = 0;
             }
 
-            for (int i = 0; i < cols; i++) {
-                for (int j = 0; j < rows; j++) {
-                    cout << (char) data[i][j] << " ";
-                }
-                cout << endl;
-            }
-            cout << "---;" << endl;
-
-
         }
         file.close();
     } else cout << "Konnte Datei nicht oeffnen";
-
-
 
     string result;
     for (int i = 0; i < cols; i++) {

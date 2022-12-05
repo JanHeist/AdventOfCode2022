@@ -4,8 +4,6 @@
 #include <sstream>
 using namespace std;
 
-// TBVFVDZPN
-
 string splitStr(string data, char splitter, int index) {
     stringstream ss(data);
     getline(ss, data, splitter);
